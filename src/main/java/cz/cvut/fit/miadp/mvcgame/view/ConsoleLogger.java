@@ -11,6 +11,7 @@ public class ConsoleLogger implements IEventSubscriber, IVisitable {
 
     String data;
     int cnt = 0;
+    int printCountLimiter = 240;
 
     public ConsoleLogger(){
         this.data = "";
@@ -39,7 +40,7 @@ public class ConsoleLogger implements IEventSubscriber, IVisitable {
 
     public void log(){
         ++cnt;
-        if(cnt < 60){
+        if(cnt < printCountLimiter){
             return;
         }
         cnt = 0;

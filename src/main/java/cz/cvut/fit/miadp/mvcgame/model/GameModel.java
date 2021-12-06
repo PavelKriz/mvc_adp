@@ -10,9 +10,7 @@ import cz.cvut.fit.miadp.mvcgame.config.MvcGameConfig;
 import cz.cvut.fit.miadp.mvcgame.model.gameObjects.*;
 import cz.cvut.fit.miadp.mvcgame.observer.IObserver;
 import cz.cvut.fit.miadp.mvcgame.publisher_subscriber.EventBus;
-import cz.cvut.fit.miadp.mvcgame.strategy.IMovingStrategy;
-import cz.cvut.fit.miadp.mvcgame.strategy.RealisticMovingStrategy;
-import cz.cvut.fit.miadp.mvcgame.strategy.SimpleMovingStrategy;
+import cz.cvut.fit.miadp.mvcgame.strategy.*;
 
 public class GameModel implements IGameModel {
 
@@ -25,6 +23,7 @@ public class GameModel implements IGameModel {
     private IGameObjectsFactory goFact;
     private int score;
     private IMovingStrategy movingStrategy;
+    private IEnemyMovingStrategy enemyMovingStrategy;
 
     private Queue<AbstractGameCommand> unexecuteCmds = new LinkedBlockingQueue<AbstractGameCommand>( );
     private Stack<AbstractGameCommand> executedCmds = new Stack<AbstractGameCommand>();
@@ -39,6 +38,7 @@ public class GameModel implements IGameModel {
         this.observers = new ArrayList<IObserver>();
         this.score = 0;
         this.movingStrategy = new SimpleMovingStrategy( );
+        this.enemyMovingStrategy = new EnemyNotMovingStrategy( );
     }
 
     public Position getCannonPosition( ){
@@ -89,12 +89,29 @@ public class GameModel implements IGameModel {
             int randInt = random.nextInt(max - min) + min;
             if(randInt < 5){
                 enemies.add( goFact.createEnemy());
+                this.notifyObservers( );
             }
         }
+
+        List<AbsEnemy> enemiesToRemove = new ArrayList<AbsEnemy>();
+        for(AbsEnemy enemy: this.enemies){
+            enemyMovingStrategy.updatePosition(enemy);
+            if(enemy.getPosition().getX() < 0 ){
+                --this.score;
+                enemiesToRemove.add(enemy);
+            }
+        }
+        this.enemies.removeAll(enemiesToRemove);
+
+        if(this.enemyMovingStrategy instanceof EnemyMovingTowardsPlayerStrategy){
+            this.notifyObservers( );
+        }
+
         List<AbsCollision> collisionsToRemove = new ArrayList<AbsCollision>();
         for(AbsCollision collision : collisions){
             if(collision.shouldExtinct()){
                 collisionsToRemove.add(collision);
+                this.notifyObservers( );
             }
         }
         collisions.removeAll(collisionsToRemove);
@@ -203,10 +220,23 @@ public class GameModel implements IGameModel {
         this.cannon.toggleShootingMode( );
     }
 
+    @Override
+    public  void toggleEnemyMovingStrategy() {
+        System.out.println("toggle difficulty");
+        if(this.enemyMovingStrategy instanceof EnemyNotMovingStrategy){
+            this.enemyMovingStrategy = new EnemyMovingTowardsPlayerStrategy();
+        } else if (enemyMovingStrategy instanceof  EnemyMovingTowardsPlayerStrategy){
+            this.enemyMovingStrategy = new EnemyNotMovingStrategy();
+        } else {
+            //new strategies
+        }
+    }
+
     private class Memento {
         private int score;
         Object cannonState;
         IMovingStrategy movingStrategy;
+        IEnemyMovingStrategy enemyMovingStrategy;
         //TODO GameModel state snapshot
     }
 
@@ -215,6 +245,7 @@ public class GameModel implements IGameModel {
         m.score = this.score;
         m.cannonState = this.cannon.getCannonState();
         m.movingStrategy = this.movingStrategy;
+        m.enemyMovingStrategy = this.enemyMovingStrategy;
         return m;
     }
 
@@ -223,6 +254,7 @@ public class GameModel implements IGameModel {
         this.score = m.score;
         this.cannon.setCannonState(m.cannonState);
         this.movingStrategy = m.movingStrategy;
+        this.enemyMovingStrategy = m.enemyMovingStrategy;
     }
 
     @Override

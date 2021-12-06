@@ -9,7 +9,6 @@ import cz.cvut.fit.miadp.mvcgame.model.gameObjects.GameObject;
 import cz.cvut.fit.miadp.mvcgame.observer.IObserver;
 import cz.cvut.fit.miadp.mvcgame.publisher_subscriber.EventBus;
 import cz.cvut.fit.miadp.mvcgame.strategy.IMovingStrategy;
-import cz.cvut.fit.miadp.mvcgame.view.ScreenLogger;
 
 public class GameModelProxy implements IGameModel {
 
@@ -107,6 +106,11 @@ public class GameModelProxy implements IGameModel {
     @Override
     public void toggleShootingMode( ) {
         this.subject.toggleShootingMode( );   
+    }
+
+    @Override
+    public void toggleEnemyMovingStrategy() {
+        this.subject.toggleEnemyMovingStrategy();
     }
 
     @Override

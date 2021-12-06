@@ -24,6 +24,7 @@ public class EducativeTestCase {
         model.undoLastCommand( );
         int positionAfterUndoX = model.getCannonPosition( ).getX( );
         int positionAfterUndoY = model.getCannonPosition( ).getY( );
+
         Assert.assertEquals(positionBeforeUndoX, positionAfterExecutionX);
         Assert.assertEquals(positionAfterUndoX, positionAfterExecutionX);
         Assert.assertEquals(positionBeforeUndoY, positionAfterExecutionY + MvcGameConfig.MOVE_STEP );

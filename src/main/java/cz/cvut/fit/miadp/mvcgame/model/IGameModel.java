@@ -7,7 +7,6 @@ import cz.cvut.fit.miadp.mvcgame.model.gameObjects.GameObject;
 import cz.cvut.fit.miadp.mvcgame.observer.IObservable;
 import cz.cvut.fit.miadp.mvcgame.publisher_subscriber.EventBus;
 import cz.cvut.fit.miadp.mvcgame.strategy.IMovingStrategy;
-import cz.cvut.fit.miadp.mvcgame.view.ScreenLogger;
 
 public interface IGameModel extends IObservable {
     public void moveCannonUp();
@@ -18,7 +17,8 @@ public interface IGameModel extends IObservable {
     public void cannonPowerUp();
     public void cannonPowerDown();
     public void toggleMovingStrategy();
-    public void toggleShootingMode( );
+    public void toggleShootingMode();
+    public void toggleEnemyMovingStrategy();
 
     public void update(EventBus eventBus);
     public List<GameObject> getGameObjects();

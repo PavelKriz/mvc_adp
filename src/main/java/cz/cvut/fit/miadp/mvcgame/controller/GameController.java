@@ -3,7 +3,6 @@ package cz.cvut.fit.miadp.mvcgame.controller;
 import java.util.List;
 
 import cz.cvut.fit.miadp.mvcgame.command.*;
-import cz.cvut.fit.miadp.mvcgame.memento.Caretaker;
 import cz.cvut.fit.miadp.mvcgame.model.IGameModel;
 
 public class GameController {
@@ -48,6 +47,11 @@ public class GameController {
                     break;
                 case "Z":
                     this.model.undoLastCommand( );
+                    break;
+                case "H":
+                    System.out.println("pressed H");
+                    this.model.registerCommand( new ToggleEnemyMovingStrategyCmd( this.model ));
+                    break;
                     
                 default: 
                     //nothing
