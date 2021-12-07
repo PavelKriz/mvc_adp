@@ -4,8 +4,6 @@ import cz.cvut.fit.miadp.mvcgame.publisher_subscriber.IEventSubscriber;
 import cz.cvut.fit.miadp.mvcgame.visitor.IVisitable;
 import cz.cvut.fit.miadp.mvcgame.visitor.IVisitor;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class ConsoleLogger implements IEventSubscriber, IVisitable {
 
@@ -21,21 +19,14 @@ public class ConsoleLogger implements IEventSubscriber, IVisitable {
         data = "";
     }
 
-    public String getLog(){
-        return data;
-    }
-
-
     @Override
     public void invoice(String message) {
         if(message.equals("!clear")){
             this.reset();
             return;
         }
-        StringBuilder stringBuilder = new StringBuilder(data);
-        stringBuilder.append(" |:| ");
-        stringBuilder.append(message);
-        data = stringBuilder.toString();
+        String ret = data + " |:| " + message;
+        data = ret;
     }
 
     public void log(){

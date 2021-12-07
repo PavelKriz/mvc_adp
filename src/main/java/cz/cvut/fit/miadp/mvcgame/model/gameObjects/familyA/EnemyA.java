@@ -47,9 +47,4 @@ public class EnemyA extends AbsEnemy {
     public void move(Vector v) {
         super.move(v);
     }
-
-    @Override
-    public Position getPosition() {
-        return super.getPosition();
-    }
 }

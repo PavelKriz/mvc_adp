@@ -16,7 +16,11 @@ public class RealisticMovingStrategy implements IMovingStrategy {
         int dY = ( int ) ( initVelocity * time * Math.sin( initAngle ) + ( 0.5 * MvcGameConfig.GRAVITY * time * time ) );
 
         missile.move( new Vector( dX, dY ) );
-        
     }
-    
+
+    @Override
+    public String toString() {
+        return "Realistic moving strategy";
+    }
+
 }

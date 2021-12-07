@@ -11,4 +11,9 @@ public class EnemyMovingTowardsPlayerStrategy implements IEnemyMovingStrategy{
         Vector v = new Vector( -MvcGameConfig.ENEMY_MOVING_SPEED, 0 );
         enemy.move( v );
     }
+
+    @Override
+    public String toString() {
+        return "Enemy are moving towards player strategy";
+    }
 }

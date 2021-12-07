@@ -37,20 +37,27 @@
       <version>13</version>
     </dependency>
 
-    <!-- Slick2D dependencies requires Java 8 JDK!!!!
     <dependency>
-			<groupId>javax.jnlp</groupId>
-			<artifactId>jnlp-api</artifactId>
-			<version>7.0</version>
-			<scope>system</scope>
-			<systemPath>${java.home}/lib/javaws.jar</systemPath>
-		</dependency>
-		<dependency>
-			<groupId>org.slick2d</groupId>
-			<artifactId>slick2d-core</artifactId>
-			<version>1.0.0</version>
-		</dependency>
-    -->
+      <groupId>org.openjfx</groupId>
+      <artifactId>javafx-media</artifactId>
+      <version>13</version>
+    </dependency>
+
+
+      <!-- Slick2D dependencies requires Java 8 JDK!!!!
+      <dependency>
+              <groupId>javax.jnlp</groupId>
+              <artifactId>jnlp-api</artifactId>
+              <version>7.0</version>
+              <scope>system</scope>
+              <systemPath>${java.home}/lib/javaws.jar</systemPath>
+          </dependency>
+          <dependency>
+              <groupId>org.slick2d</groupId>
+              <artifactId>slick2d-core</artifactId>
+              <version>1.0.0</version>
+          </dependency>
+      -->
 
   </dependencies>
 

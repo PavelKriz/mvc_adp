@@ -12,9 +12,6 @@ import cz.cvut.fit.miadp.mvcgame.proxy.GameModelProxy;
 import cz.cvut.fit.miadp.mvcgame.publisher_subscriber.EventBus;
 import cz.cvut.fit.miadp.mvcgame.view.ConsoleLogger;
 import cz.cvut.fit.miadp.mvcgame.view.GameView;
-// in future, use Bridge to remove this dependency
-import cz.cvut.fit.miadp.mvcgame.view.ScreenLogger;
-import javafx.scene.canvas.GraphicsContext;
 
 public class MvcGame
 {

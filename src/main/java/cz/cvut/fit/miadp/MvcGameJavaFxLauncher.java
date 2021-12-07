@@ -30,7 +30,7 @@ public class MvcGameJavaFxLauncher extends Application {
     public void start(Stage stage) {
         String winTitle = theMvcGame.getWindowTitle();
         int winWidth = theMvcGame.getWindowWidth();
-        int winHeigth = theMvcGame.getWindowHeight();
+        int winHeight = theMvcGame.getWindowHeight();
 
         stage.setTitle( winTitle );
 
@@ -38,7 +38,7 @@ public class MvcGameJavaFxLauncher extends Application {
         Scene theScene = new Scene( root );
         stage.setScene( theScene );
             
-        Canvas canvas = new Canvas( winWidth, winHeigth );
+        Canvas canvas = new Canvas( winWidth, winHeight );
         root.getChildren().add( canvas );
             
         GraphicsContext gc = canvas.getGraphicsContext2D();

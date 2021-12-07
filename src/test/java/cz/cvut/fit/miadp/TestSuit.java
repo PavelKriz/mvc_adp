@@ -8,7 +8,6 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses( {
     EducativeTestCase.class,
     EducativeTestCaseMock.class
-
     } )
 
 public class TestSuit {

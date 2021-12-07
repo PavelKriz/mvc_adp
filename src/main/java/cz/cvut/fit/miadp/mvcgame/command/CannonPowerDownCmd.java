@@ -10,6 +10,6 @@ public class CannonPowerDownCmd extends AbstractGameCommand{
 
     @Override
     protected void execute() {
-        this.subject.moveCannonDown();
+        this.subject.cannonPowerDown();
     }
 }

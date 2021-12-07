@@ -2,8 +2,8 @@ package cz.cvut.fit.miadp.mvcgame.model;
 
 public class Vector {
 
-    private int dX = 0;
-    private int dY = 0;
+    private int dX;
+    private int dY;
     
 
     public Vector( int dX, int dY ) {

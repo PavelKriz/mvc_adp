@@ -2,7 +2,6 @@ package cz.cvut.fit.miadp.mvcgame.model.gameObjects;
 
 import java.util.List;
 
-import cz.cvut.fit.miadp.mvcgame.publisher_subscriber.EventBus;
 import cz.cvut.fit.miadp.mvcgame.publisher_subscriber.IEventPublisher;
 import cz.cvut.fit.miadp.mvcgame.state.DoubleShootingMode;
 import cz.cvut.fit.miadp.mvcgame.state.IShootingMode;

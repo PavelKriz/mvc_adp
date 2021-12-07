@@ -42,11 +42,9 @@ public class CannonA extends AbsCannon {
 
     @Override
     public void publish(EventBus eventBus) {
-        String cannon = "CANNON INFO";
         String shootingMode = "Shooting mode: " + this.shootingMode.getName();
         String power = "Cannon power: " + this.power;
         String angle = "Cannon angle: " + this.angle;
-        eventBus.publish(EventBus.ETopic.SCREEN_LOGGING, cannon);
         eventBus.publish(EventBus.ETopic.SCREEN_LOGGING, shootingMode);
         eventBus.publish(EventBus.ETopic.SCREEN_LOGGING, power);
         eventBus.publish(EventBus.ETopic.SCREEN_LOGGING, angle);

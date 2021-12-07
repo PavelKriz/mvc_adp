@@ -6,7 +6,7 @@ import cz.cvut.fit.miadp.mvcgame.model.gameObjects.GameObject;
 import cz.cvut.fit.miadp.mvcgame.observer.IObserver;
 import cz.cvut.fit.miadp.mvcgame.publisher_subscriber.EventBus;
 import cz.cvut.fit.miadp.mvcgame.visitor.GameRenderer;
-// in future, use Bridge to remove this dependency
+// In the future, use Bridge to remove this dependency
 
 
 public class GameView implements IObserver {
