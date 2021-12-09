@@ -25,8 +25,7 @@ public class ConsoleLogger implements IEventSubscriber, IVisitable {
             this.reset();
             return;
         }
-        String ret = data + " |:| " + message;
-        data = ret;
+        data = data + " |:| " + message;
     }
 
     public void log(){
@@ -36,6 +35,10 @@ public class ConsoleLogger implements IEventSubscriber, IVisitable {
         }
         cnt = 0;
         System.out.println(data);
+    }
+
+    public String getLog(){
+        return data;
     }
 
     @Override

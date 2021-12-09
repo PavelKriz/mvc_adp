@@ -22,7 +22,7 @@ public class MvcGame
     private EventBus eventBus;
 
     public void init( ) {
-        this.model = new GameModelProxy( new GameModel( ) );
+        this.model = new GameModelProxy( new GameModel( true ) );
         this.eventBus = new EventBus();
         this.consoleLogger = new ConsoleLogger();
         eventBus.subscribe(EventBus.ETopic.SCREEN_LOGGING, this.consoleLogger);

@@ -26,28 +26,32 @@ public class GameModel implements IGameModel {
     private List<AbsCollision> collisions;
     private List<IObserver> observers;
     private Map<String, IExpression> soundExpressions;
+    private boolean playSounds;
     private IGameObjectsFactory goFact;
     private int score;
     private IMovingStrategy movingStrategy;
     private IEnemyMovingStrategy enemyMovingStrategy;
 
-    private Queue<AbstractGameCommand> unexecutedCmds = new LinkedBlockingQueue<AbstractGameCommand>();
-    private Stack<AbstractGameCommand> executedCmds = new Stack<AbstractGameCommand>();
+    private Queue<AbstractGameCommand> unexecutedCmds = new LinkedBlockingQueue<>();
+    private Stack<AbstractGameCommand> executedCmds = new Stack<>();
 
-    public GameModel() {
+    public GameModel( boolean playSounds ) {
         this.random = new Random();
         this.goFact = new GameObjectsFactoryA(this);
         this.cannon = this.goFact.createCannon();
-        this.missiles = new ArrayList<AbsMissile>();
-        this.enemies = new ArrayList<AbsEnemy>();
-        this.collisions = new ArrayList<AbsCollision>();
-        this.observers = new ArrayList<IObserver>();
+        this.missiles = new ArrayList<>();
+        this.enemies = new ArrayList<>();
+        this.collisions = new ArrayList<>();
+        this.observers = new ArrayList<>();
         this.soundExpressions = new HashMap<>();
         this.score = 0;
         this.movingStrategy = new SimpleMovingStrategy();
         this.enemyMovingStrategy = new EnemyNotMovingStrategy();
 
-        loadSounds();
+        this.playSounds = playSounds;
+        if (playSounds) {
+            loadSounds();
+        }
     }
 
     private void loadSounds() {
@@ -136,8 +140,10 @@ public class GameModel implements IGameModel {
             int randInt = random.nextInt(max - min) + min;
             if (randInt < 5) {
                 enemies.add(goFact.createEnemy());
-                IExpression player = new PlayExpression("spawn");
-                player.interpret(this.soundExpressions);
+                if( playSounds ) {
+                    IExpression player = new PlayExpression("spawn");
+                    player.interpret(this.soundExpressions);
+                }
                 this.notifyObservers();
             }
         }
@@ -148,13 +154,15 @@ public class GameModel implements IGameModel {
             return;
         }
 
-        List<AbsEnemy> enemiesToRemove = new ArrayList<AbsEnemy>();
+        List<AbsEnemy> enemiesToRemove = new ArrayList<>();
         for (AbsEnemy enemy : this.enemies) {
             enemyMovingStrategy.updatePosition(enemy);
             if (enemy.getPosition().getX() < 0) {
                 --this.score;
-                IExpression player = new PlayExpression("damage");
-                player.interpret(this.soundExpressions);
+                if( playSounds ) {
+                    IExpression player = new PlayExpression("damage");
+                    player.interpret(this.soundExpressions);
+                }
                 enemiesToRemove.add(enemy);
             }
         }
@@ -171,7 +179,7 @@ public class GameModel implements IGameModel {
     }
 
     private void handleCollisions() {
-        List<AbsCollision> collisionsToRemove = new ArrayList<AbsCollision>();
+        List<AbsCollision> collisionsToRemove = new ArrayList<>();
         for (AbsCollision collision : collisions) {
             if (collision.shouldExtinct()) {
                 collisionsToRemove.add(collision);
@@ -206,8 +214,10 @@ public class GameModel implements IGameModel {
     }
 
     private void handleHitEnemy(AbsEnemy enemy) {
-        IExpression player = new PlayExpression("crash");
-        player.interpret(this.soundExpressions);
+        if( playSounds ) {
+            IExpression player = new PlayExpression("crash");
+            player.interpret(this.soundExpressions);
+        }
 
         enemy.die();
         this.score += enemy.scoreGain();
@@ -217,8 +227,8 @@ public class GameModel implements IGameModel {
     }
 
     private void destroyMissiles() {
-        List<AbsMissile> toRemoveMissiles = new ArrayList<AbsMissile>();
-        List<AbsEnemy> toRemoveEnemies = new ArrayList<AbsEnemy>();
+        List<AbsMissile> toRemoveMissiles = new ArrayList<>();
+        List<AbsEnemy> toRemoveEnemies = new ArrayList<>();
         for (AbsMissile missile : this.missiles) {
             // getting out of bounds
             if (missile.getPosition().getX() > MvcGameConfig.MAX_X) {
@@ -227,8 +237,10 @@ public class GameModel implements IGameModel {
             //destroying enemy
             for (AbsEnemy enemy : enemies) {
                 if (enemy.hit(missile)) {
-                    IExpression player = new PlayExpression("crash");
-                    player.interpret(this.soundExpressions);
+                    if( this.playSounds ) {
+                        IExpression player = new PlayExpression("crash");
+                        player.interpret(this.soundExpressions);
+                    }
 
                     handleHitEnemy(enemy);
                     toRemoveEnemies.add(enemy);
@@ -266,8 +278,10 @@ public class GameModel implements IGameModel {
     public void cannonShoot() {
         this.missiles.addAll(cannon.shoot());
 
-        IExpression player = new PlayExpression("shoot");
-        player.interpret(this.soundExpressions);
+        if( playSounds ) {
+            IExpression player = new PlayExpression("shoot");
+            player.interpret(this.soundExpressions);
+        }
 
         this.notifyObservers();
     }
@@ -277,7 +291,7 @@ public class GameModel implements IGameModel {
     }
 
     public List<GameObject> getGameObjects() {
-        List<GameObject> go = new ArrayList<GameObject>();
+        List<GameObject> go = new ArrayList<>();
         go.addAll(this.missiles);
         go.add(this.cannon);
         go.addAll(this.collisions);
@@ -315,12 +329,22 @@ public class GameModel implements IGameModel {
         }
     }
 
-    private class Memento {
+    static private class Memento {
         private int score;
         Object cannonState;
         IMovingStrategy movingStrategy;
         IEnemyMovingStrategy enemyMovingStrategy;
-        //TODO GameModel state snapshot
+
+        @Override
+        public boolean equals(Object obj) {
+            if(!(obj instanceof Memento)) return false;
+            Memento m2 = (Memento) obj;
+            if(this.score != m2.score) return false;
+            if(!this.cannonState.equals(m2.cannonState)) return false;
+            if(!this.movingStrategy.getClass().equals(m2.movingStrategy.getClass())) return false;
+            if(!this.enemyMovingStrategy.getClass().equals(m2.enemyMovingStrategy.getClass())) return false;
+            return true;
+        }
     }
 
     public Object createMemento() {

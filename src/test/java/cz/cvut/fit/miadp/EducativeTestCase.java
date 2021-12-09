@@ -13,7 +13,7 @@ public class EducativeTestCase {
 
     @Test
     public void undoLastCommand( ){
-        IGameModel model = new GameModel( );
+        IGameModel model = new GameModel( false );
         int positionBeforeUndoX = model.getCannonPosition( ).getX( );
         int positionBeforeUndoY = model.getCannonPosition( ).getY( );
         model.registerCommand( new MoveCannonUpCmd( model ) );
