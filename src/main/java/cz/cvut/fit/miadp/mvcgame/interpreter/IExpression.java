@@ -4,5 +4,6 @@ import java.util.Map;
 
 public interface IExpression {
     IExpression interpret(Map<String, IExpression> context);
+
     String interpret();
 }

@@ -1,4 +1,5 @@
 package cz.cvut.fit.miadp.mvcgame.view;
+
 import cz.cvut.fit.miadp.mvcgame.bridge.IGameGraphics;
 import cz.cvut.fit.miadp.mvcgame.controller.GameController;
 import cz.cvut.fit.miadp.mvcgame.model.IGameModel;
@@ -11,51 +12,50 @@ import cz.cvut.fit.miadp.mvcgame.visitor.GameRenderer;
 
 public class GameView implements IObserver {
 
-    private GameController controller;
-    private IGameModel model;
+    private final GameController controller;
+    private final IGameModel model;
     private IGameGraphics gr;
     private int updateCnt;
-    private GameRenderer render;
-    private ScreenLogger screenLogger;
+    private final GameRenderer render;
+    private final ScreenLogger screenLogger;
 
     public GameView(IGameModel model, EventBus eventBus) {
         this.screenLogger = new ScreenLogger();
-        eventBus.subscribe(EventBus.ETopic.SCREEN_LOGGING, screenLogger );
+        eventBus.subscribe(EventBus.ETopic.SCREEN_LOGGING, screenLogger);
         this.model = model;
-        this.controller = new GameController( model );
+        this.controller = new GameController(model);
         this.updateCnt = 1;
-        this.model.registerObserver( this );
+        this.model.registerObserver(this);
         this.render = new GameRenderer();
     }
 
-    public GameController getController( ){
+    public GameController getController() {
         return this.controller;
     }
 
-    public void render()
-    {
-        if( this.gr == null ){
+    public void render() {
+        if (this.gr == null) {
             return;
         }
-        if( this.updateCnt > 0 ){
+        if (this.updateCnt > 0) {
             // Clear the canvas
-            this.gr.clear( );
+            this.gr.clear();
             this.screenLogger.acceptVisitor(this.render);
-            for ( GameObject go : this.model.getGameObjects( ) ){
-                go.acceptVisitor( this.render );
+            for (GameObject go : this.model.getGameObjects()) {
+                go.acceptVisitor(this.render);
             }
             this.updateCnt = 0;
         }
     }
 
-    public void setGraphicContext( IGameGraphics gr ) {
+    public void setGraphicContext(IGameGraphics gr) {
         this.gr = gr;
-        this.render.setGraphicContext( gr );
+        this.render.setGraphicContext(gr);
     }
 
     @Override
     public void update() {
         this.updateCnt++;
-        this.render( );
+        this.render();
     }
 }

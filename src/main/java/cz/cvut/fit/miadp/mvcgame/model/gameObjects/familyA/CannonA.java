@@ -1,9 +1,5 @@
 package cz.cvut.fit.miadp.mvcgame.model.gameObjects.familyA;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-
 import cz.cvut.fit.miadp.mvcgame.abstractFactory.IGameObjectsFactory;
 import cz.cvut.fit.miadp.mvcgame.config.MvcGameConfig;
 import cz.cvut.fit.miadp.mvcgame.model.Position;
@@ -13,15 +9,18 @@ import cz.cvut.fit.miadp.mvcgame.model.gameObjects.AbsMissile;
 import cz.cvut.fit.miadp.mvcgame.publisher_subscriber.EventBus;
 import cz.cvut.fit.miadp.mvcgame.state.IShootingMode;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CannonA extends AbsCannon {
 
-    private IGameObjectsFactory goFact;
+    private final IGameObjectsFactory goFact;
 
     private double angle;
     private int power;
-    private List<AbsMissile> shootingBatch;
+    private final List<AbsMissile> shootingBatch;
 
-    public CannonA( Position initialPosition, IGameObjectsFactory goFact ){
+    public CannonA(Position initialPosition, IGameObjectsFactory goFact) {
         this.position = initialPosition;
         this.goFact = goFact;
 
@@ -32,12 +31,12 @@ public class CannonA extends AbsCannon {
         this.shootingMode = AbsCannon.SINGLE_SHOOTING_MODE;
     }
 
-    public void moveUp( ){
-        this.move( new Vector(0, -1 * MvcGameConfig.MOVE_STEP ) );
+    public void moveUp() {
+        this.move(new Vector(0, -1 * MvcGameConfig.MOVE_STEP));
     }
 
-    public void moveDown( ){
-        this.move( new Vector(0, MvcGameConfig.MOVE_STEP ) );
+    public void moveDown() {
+        this.move(new Vector(0, MvcGameConfig.MOVE_STEP));
 
     }
 
@@ -52,15 +51,15 @@ public class CannonA extends AbsCannon {
     }
 
     @Override
-    public List<AbsMissile> shoot( ) {
-        this.shootingBatch.clear( );
-        this.shootingMode.shoot( this );
+    public List<AbsMissile> shoot() {
+        this.shootingBatch.clear();
+        this.shootingMode.shoot(this);
         return this.shootingBatch;
     }
 
     @Override
-    public void primitiveShoot( ) {
-        this.shootingBatch.add( this.goFact.createMissile( this.angle, this.power ) );
+    public void primitiveShoot() {
+        this.shootingBatch.add(this.goFact.createMissile(this.angle, this.power));
     }
 
     @Override
@@ -80,9 +79,9 @@ public class CannonA extends AbsCannon {
 
     @Override
     public void powerDown() {
-        if ( this.power - MvcGameConfig.POWER_STEP > 0 ){
+        if (this.power - MvcGameConfig.POWER_STEP > 0) {
             this.power -= MvcGameConfig.POWER_STEP;
-        }  
+        }
     }
 
     static private class ExternalCannonAState {
@@ -94,14 +93,13 @@ public class CannonA extends AbsCannon {
 
         @Override
         public boolean equals(Object obj) {
-            if(! (obj instanceof ExternalCannonAState) ) return false;
+            if (!(obj instanceof ExternalCannonAState)) return false;
             ExternalCannonAState ecs = (ExternalCannonAState) obj;
-            if(this.cannonX != ecs.cannonX) return false;
-            if(this.cannonY != ecs.cannonY) return false;
-            if(this.power != ecs.power) return false;
-            if(this.angle != ecs.angle) return false;
-            if(! this.shootingMode.getClass().equals(ecs.shootingMode.getClass())) return false;
-            return true;
+            if (this.cannonX != ecs.cannonX) return false;
+            if (this.cannonY != ecs.cannonY) return false;
+            if (this.power != ecs.power) return false;
+            if (this.angle != ecs.angle) return false;
+            return this.shootingMode.getClass().equals(ecs.shootingMode.getClass());
         }
     }
 
@@ -119,7 +117,7 @@ public class CannonA extends AbsCannon {
 
     @Override
     public void setCannonState(Object state) {
-        ExternalCannonAState s = (ExternalCannonAState)state;
+        ExternalCannonAState s = (ExternalCannonAState) state;
         this.getPosition().setX(s.cannonX);
         this.getPosition().setY(s.cannonY);
         this.power = s.power;

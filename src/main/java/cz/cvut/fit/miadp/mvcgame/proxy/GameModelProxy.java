@@ -1,7 +1,5 @@
 package cz.cvut.fit.miadp.mvcgame.proxy;
 
-import java.util.List;
-
 import cz.cvut.fit.miadp.mvcgame.command.AbstractGameCommand;
 import cz.cvut.fit.miadp.mvcgame.model.IGameModel;
 import cz.cvut.fit.miadp.mvcgame.model.Position;
@@ -10,102 +8,104 @@ import cz.cvut.fit.miadp.mvcgame.observer.IObserver;
 import cz.cvut.fit.miadp.mvcgame.publisher_subscriber.EventBus;
 import cz.cvut.fit.miadp.mvcgame.strategy.IMovingStrategy;
 
+import java.util.List;
+
 public class GameModelProxy implements IGameModel {
 
-    private IGameModel subject;
+    private final IGameModel subject;
 
-    public GameModelProxy( IGameModel model ) {
+    public GameModelProxy(IGameModel model) {
         this.subject = model;
     }
 
     @Override
-    public void registerObserver( IObserver obs ) {
-        this.subject.registerObserver( obs );
+    public void registerObserver(IObserver obs) {
+        this.subject.registerObserver(obs);
     }
 
     @Override
-    public void unregisterObserver( IObserver obs ) {
-        this.subject.unregisterObserver( obs );
+    public void unregisterObserver(IObserver obs) {
+        this.subject.unregisterObserver(obs);
     }
 
     @Override
-    public void notifyObservers( ) {
-        this.subject.notifyObservers( );
+    public void notifyObservers() {
+        this.subject.notifyObservers();
     }
 
     @Override
-    public void moveCannonUp( ) {
-        this.subject.moveCannonUp( );
+    public void moveCannonUp() {
+        this.subject.moveCannonUp();
     }
 
     @Override
-    public void moveCannonDown( ) {
-        this.subject.moveCannonDown( );
+    public void moveCannonDown() {
+        this.subject.moveCannonDown();
     }
 
     @Override
-    public void cannonShoot( ) {
-        this.subject.cannonShoot( );
+    public void cannonShoot() {
+        this.subject.cannonShoot();
     }
 
     @Override
-    public void aimCannonUp( ) {
-        this.subject.aimCannonUp( );
+    public void aimCannonUp() {
+        this.subject.aimCannonUp();
     }
 
     @Override
-    public void aimCannonDown( ) {
-        this.subject.aimCannonDown( );
+    public void aimCannonDown() {
+        this.subject.aimCannonDown();
     }
 
     @Override
-    public void cannonPowerUp( ) {
-        this.subject.cannonPowerUp( );
+    public void cannonPowerUp() {
+        this.subject.cannonPowerUp();
     }
 
     @Override
-    public void cannonPowerDown( ) {
-        this.subject.cannonPowerDown( );
+    public void cannonPowerDown() {
+        this.subject.cannonPowerDown();
     }
 
     @Override
-    public void toggleMovingStrategy( ) {
-        this.subject.toggleMovingStrategy( );
+    public void toggleMovingStrategy() {
+        this.subject.toggleMovingStrategy();
     }
 
     @Override
     public void update(EventBus eventBus) {
-        this.subject.update( eventBus );
+        this.subject.update(eventBus);
     }
 
     @Override
-    public List<GameObject> getGameObjects( ) {
-        return this.subject.getGameObjects( );
+    public List<GameObject> getGameObjects() {
+        return this.subject.getGameObjects();
     }
 
     @Override
-    public IMovingStrategy getMovingStrategy( ) {
-        return this.subject.getMovingStrategy( );
+    public IMovingStrategy getMovingStrategy() {
+        return this.subject.getMovingStrategy();
     }
 
     @Override
-    public Object createMemento( ) {
-        return this.subject.createMemento( );
+    public Object createMemento() {
+        return this.subject.createMemento();
     }
 
     @Override
-    public void setMemento( Object memento ) {
-        this.subject.setMemento( memento );
+    public void setMemento(Object memento) {
+        this.subject.setMemento(memento);
     }
 
     @Override
-    public Position getCannonPosition( ) {
-        return this.subject.getCannonPosition( );
+    public Position getCannonPosition() {
+        return this.subject.getCannonPosition();
     }
 
     @Override
-    public void toggleShootingMode( ) {
-        this.subject.toggleShootingMode( );   
+    public void toggleShootingMode() {
+        this.subject.toggleShootingMode();
     }
 
     @Override
@@ -115,11 +115,11 @@ public class GameModelProxy implements IGameModel {
 
     @Override
     public void registerCommand(AbstractGameCommand cmd) {
-        this.subject.registerCommand( cmd );
+        this.subject.registerCommand(cmd);
     }
 
     @Override
-    public void undoLastCommand( ) {
-        this.subject.undoLastCommand( );  
+    public void undoLastCommand() {
+        this.subject.undoLastCommand();
     }
 }

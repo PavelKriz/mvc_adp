@@ -4,7 +4,7 @@ import cz.cvut.fit.miadp.mvcgame.model.IGameModel;
 
 public class ToggleMovingStrategyCmd extends AbstractGameCommand {
 
-    public ToggleMovingStrategyCmd(IGameModel subject ){
+    public ToggleMovingStrategyCmd(IGameModel subject) {
         this.subject = subject;
     }
 

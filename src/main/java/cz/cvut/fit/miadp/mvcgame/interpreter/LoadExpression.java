@@ -10,7 +10,7 @@ public class LoadExpression implements IExpression {
     String pathVar;
     String nameVar;
 
-    public LoadExpression(String pathVar, String nameVar){
+    public LoadExpression(String pathVar, String nameVar) {
         this.pathVar = pathVar;
         this.nameVar = nameVar;
     }

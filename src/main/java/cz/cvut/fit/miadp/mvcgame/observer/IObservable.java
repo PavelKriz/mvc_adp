@@ -2,9 +2,10 @@ package cz.cvut.fit.miadp.mvcgame.observer;
 
 public interface IObservable {
 
-    public void registerObserver( IObserver obs );
-    public void unregisterObserver( IObserver obs );
+    void registerObserver(IObserver obs);
 
-    public void notifyObservers( );
-    
+    void unregisterObserver(IObserver obs);
+
+    void notifyObservers();
+
 }

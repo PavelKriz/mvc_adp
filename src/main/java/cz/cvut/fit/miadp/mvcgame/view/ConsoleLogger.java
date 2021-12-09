@@ -11,33 +11,33 @@ public class ConsoleLogger implements IEventSubscriber, IVisitable {
     int cnt = 0;
     int printCountLimiter = 240;
 
-    public ConsoleLogger(){
+    public ConsoleLogger() {
         this.data = "";
     }
 
-    protected void reset(){
+    protected void reset() {
         data = "";
     }
 
     @Override
     public void invoice(String message) {
-        if(message.equals("!clear")){
+        if (message.equals("!clear")) {
             this.reset();
             return;
         }
         data = data + " |:| " + message;
     }
 
-    public void log(){
+    public void log() {
         ++cnt;
-        if(cnt < printCountLimiter){
+        if (cnt < printCountLimiter) {
             return;
         }
         cnt = 0;
         System.out.println(data);
     }
 
-    public String getLog(){
+    public String getLog() {
         return data;
     }
 

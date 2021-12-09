@@ -6,25 +6,25 @@ import cz.cvut.fit.miadp.mvcgame.visitor.IVisitor;
 
 import java.util.ArrayList;
 import java.util.List;
+
 public class ScreenLogger implements IEventSubscriber, IVisitable {
     List<String> toLog;
 
-    public ScreenLogger(){
+    public ScreenLogger() {
         toLog = new ArrayList<String>();
     }
 
-    protected void reset(){
+    protected void reset() {
         toLog.clear();
     }
 
-    public List<String> getLog(){
+    public List<String> getLog() {
         return toLog;
     }
 
-
     @Override
     public void invoice(String message) {
-        if(message.equals("!clear")){
+        if (message.equals("!clear")) {
             this.reset();
             return;
         }

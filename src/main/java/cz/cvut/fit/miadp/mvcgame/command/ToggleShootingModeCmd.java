@@ -4,7 +4,7 @@ import cz.cvut.fit.miadp.mvcgame.model.IGameModel;
 
 public class ToggleShootingModeCmd extends AbstractGameCommand {
 
-    public ToggleShootingModeCmd( IGameModel subject ){
+    public ToggleShootingModeCmd(IGameModel subject) {
         this.subject = subject;
     }
 

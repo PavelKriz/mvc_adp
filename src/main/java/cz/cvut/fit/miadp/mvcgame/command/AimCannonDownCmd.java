@@ -2,9 +2,9 @@ package cz.cvut.fit.miadp.mvcgame.command;
 
 import cz.cvut.fit.miadp.mvcgame.model.IGameModel;
 
-public class AimCannonDownCmd extends AbstractGameCommand{
+public class AimCannonDownCmd extends AbstractGameCommand {
 
-    public AimCannonDownCmd( IGameModel subject ){
+    public AimCannonDownCmd(IGameModel subject) {
         this.subject = subject;
     }
 

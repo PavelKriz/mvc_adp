@@ -5,7 +5,7 @@ import java.util.Map;
 public class StringValueExpression implements IExpression {
     String value;
 
-    public StringValueExpression(String value){
+    public StringValueExpression(String value) {
         this.value = value;
     }
 

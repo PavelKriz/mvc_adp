@@ -8,12 +8,12 @@ public abstract class GameObject implements IVisitable {
 
     protected Position position;
 
-    public void move( Vector v ) {
-        this.position.add( v );
-    } 
+    public void move(Vector v) {
+        this.position.add(v);
+    }
 
-    public Position getPosition( ){
+    public Position getPosition() {
         return this.position;
     }
-    
+
 }

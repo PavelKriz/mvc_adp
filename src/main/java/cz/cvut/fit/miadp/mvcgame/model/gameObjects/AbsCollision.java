@@ -13,14 +13,15 @@ public abstract class AbsCollision extends LifetimeLimitedGameObject {
     }
 
     @Override
-    public void move(Vector v) {}
+    public void move(Vector v) {
+    }
 
     @Override
     public void acceptVisitor(IVisitor visitor) {
-        visitor.visitCollision( this );
+        visitor.visitCollision(this);
     }
 
-    public boolean shouldExtinct(){
+    public boolean shouldExtinct() {
         return getAge() > lifeTime;
     }
 }

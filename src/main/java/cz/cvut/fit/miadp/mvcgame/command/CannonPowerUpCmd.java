@@ -2,9 +2,9 @@ package cz.cvut.fit.miadp.mvcgame.command;
 
 import cz.cvut.fit.miadp.mvcgame.model.IGameModel;
 
-public class CannonPowerUpCmd extends AbstractGameCommand{
+public class CannonPowerUpCmd extends AbstractGameCommand {
 
-    public CannonPowerUpCmd( IGameModel subject ){
+    public CannonPowerUpCmd(IGameModel subject) {
         this.subject = subject;
     }
 

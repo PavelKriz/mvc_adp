@@ -15,7 +15,7 @@ public abstract class AbsEnemy extends GameObject implements IHittable {
         collision = goFact.createCollision(this);
     }
 
-    public AbsCollision getCollision(){
+    public AbsCollision getCollision() {
         return collision;
     }
 
@@ -31,10 +31,8 @@ public abstract class AbsEnemy extends GameObject implements IHittable {
     @Override
     public boolean hit(AbsMissile missile) {
         Position pos = missile.getPosition();
-        if(Math.abs(this.position.getY() - pos.getY()) < hitBoxHeight){
-            if(Math.abs(this.position.getX() - pos.getX()) < hitBoxWidth){
-                return true;
-            }
+        if (Math.abs(this.position.getY() - pos.getY()) < hitBoxHeight) {
+            return Math.abs(this.position.getX() - pos.getX()) < hitBoxWidth;
         }
         return false;
     }

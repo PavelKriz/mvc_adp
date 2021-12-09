@@ -14,27 +14,27 @@ import java.util.Random;
 
 public class GameObjectsFactoryA implements IGameObjectsFactory {
 
-    private Random random;
-    private IGameModel model;
+    private final Random random;
+    private final IGameModel model;
 
-    public GameObjectsFactoryA( IGameModel model ){
+    public GameObjectsFactoryA(IGameModel model) {
         this.random = new Random();
         this.model = model;
     }
 
 
     @Override
-    public CannonA createCannon( ) {
-        return new CannonA( new Position( MvcGameConfig.CANNON_POS_X, MvcGameConfig.CANNON_POS_Y ), this );
+    public CannonA createCannon() {
+        return new CannonA(new Position(MvcGameConfig.CANNON_POS_X, MvcGameConfig.CANNON_POS_Y), this);
 
     }
 
     @Override
-    public EnemyA createEnemy( ){
-        int randX = random.nextInt( MvcGameConfig.MAX_X - MvcGameConfig.MIN_X_ENEMY) + MvcGameConfig.MIN_X_ENEMY;
-        int randY = random.nextInt( MvcGameConfig.MAX_Y);
+    public EnemyA createEnemy() {
+        int randX = random.nextInt(MvcGameConfig.MAX_X - MvcGameConfig.MIN_X_ENEMY) + MvcGameConfig.MIN_X_ENEMY;
+        int randY = random.nextInt(MvcGameConfig.MAX_Y);
         boolean enemy1 = random.nextBoolean();
-        if(enemy1) {
+        if (enemy1) {
             return new EnemyA(this, EnemyA.EnemyType.ENEMY_1, new Position(randX, randY));
         } else {
             return new EnemyA(this, EnemyA.EnemyType.ENEMY_2, new Position(randX, randY));
@@ -47,17 +47,17 @@ public class GameObjectsFactoryA implements IGameObjectsFactory {
     }
 
     @Override
-    public MissileA createMissile( double initAngle, int initVelocity ) {
-        return new MissileA( 
-            new Position( 
-                model.getCannonPosition( ).getX(), 
-                model.getCannonPosition().getY( ) 
-            ), 
-            initAngle,
-            initVelocity, 
-            this.model.getMovingStrategy( )
+    public MissileA createMissile(double initAngle, int initVelocity) {
+        return new MissileA(
+                new Position(
+                        model.getCannonPosition().getX(),
+                        model.getCannonPosition().getY()
+                ),
+                initAngle,
+                initVelocity,
+                this.model.getMovingStrategy()
         );
 
     }
-    
+
 }

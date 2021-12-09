@@ -5,28 +5,28 @@ import cz.cvut.fit.miadp.mvcgame.visitor.IVisitor;
 
 public abstract class AbsMissile extends LifetimeLimitedGameObject {
 
-    private double initAngle;
-    private int initVelocity;
+    private final double initAngle;
+    private final int initVelocity;
 
-    protected AbsMissile( Position initialPosition, double initAngle, int initVelocity ){
-        super( initialPosition );
+    protected AbsMissile(Position initialPosition, double initAngle, int initVelocity) {
+        super(initialPosition);
         this.initAngle = initAngle;
         this.initVelocity = initVelocity;
     }
 
-    public abstract void move( );
+    public abstract void move();
 
     @Override
-    public void acceptVisitor( IVisitor visitor ){
-        visitor.visitMissile( this );
+    public void acceptVisitor(IVisitor visitor) {
+        visitor.visitMissile(this);
     }
 
-    public int getInitVelocity( ){
+    public int getInitVelocity() {
         return this.initVelocity;
     }
 
-    public double getInitAngle( ){
+    public double getInitAngle() {
         return this.initAngle;
     }
-    
+
 }

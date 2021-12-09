@@ -5,11 +5,11 @@ import javafx.util.Duration;
 
 import java.util.Map;
 
-public class SoundExpression implements IExpression{
+public class SoundExpression implements IExpression {
     MediaPlayer mediaPlayer;
     String name;
 
-    public SoundExpression(MediaPlayer mediaPlayer, String name){
+    public SoundExpression(MediaPlayer mediaPlayer, String name) {
         this.mediaPlayer = mediaPlayer;
         this.mediaPlayer.setStartTime(Duration.ZERO);
         this.name = name;

@@ -1,32 +1,47 @@
 package cz.cvut.fit.miadp.mvcgame.model;
 
-import java.util.List;
-
 import cz.cvut.fit.miadp.mvcgame.command.AbstractGameCommand;
 import cz.cvut.fit.miadp.mvcgame.model.gameObjects.GameObject;
 import cz.cvut.fit.miadp.mvcgame.observer.IObservable;
 import cz.cvut.fit.miadp.mvcgame.publisher_subscriber.EventBus;
 import cz.cvut.fit.miadp.mvcgame.strategy.IMovingStrategy;
 
+import java.util.List;
+
 public interface IGameModel extends IObservable {
-    public void moveCannonUp();
-    public void moveCannonDown();
-    public void cannonShoot();
-    public void aimCannonUp();
-    public void aimCannonDown();
-    public void cannonPowerUp();
-    public void cannonPowerDown();
-    public void toggleMovingStrategy();
-    public void toggleShootingMode();
-    public void toggleEnemyMovingStrategy();
+    void moveCannonUp();
 
-    public void update(EventBus eventBus);
-    public List<GameObject> getGameObjects();
-    public IMovingStrategy getMovingStrategy();
-    public Object createMemento();
-    public void setMemento(Object memento);
-	public Position getCannonPosition();
+    void moveCannonDown();
 
-    public void registerCommand( AbstractGameCommand cmd );
-    public void undoLastCommand( );
+    void cannonShoot();
+
+    void aimCannonUp();
+
+    void aimCannonDown();
+
+    void cannonPowerUp();
+
+    void cannonPowerDown();
+
+    void toggleMovingStrategy();
+
+    void toggleShootingMode();
+
+    void toggleEnemyMovingStrategy();
+
+    void update(EventBus eventBus);
+
+    List<GameObject> getGameObjects();
+
+    IMovingStrategy getMovingStrategy();
+
+    Object createMemento();
+
+    void setMemento(Object memento);
+
+    Position getCannonPosition();
+
+    void registerCommand(AbstractGameCommand cmd);
+
+    void undoLastCommand();
 }

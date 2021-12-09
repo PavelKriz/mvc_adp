@@ -8,13 +8,13 @@ public class EventBus {
         SCREEN_LOGGING
     }
 
-    private List<IEventSubscriber> screenLoggingSubscribers;
+    private final List<IEventSubscriber> screenLoggingSubscribers;
 
     public EventBus() {
         this.screenLoggingSubscribers = new ArrayList<IEventSubscriber>();
     }
 
-    public void subscribe(ETopic topic, IEventSubscriber eventSubscriber){
+    public void subscribe(ETopic topic, IEventSubscriber eventSubscriber) {
         switch (topic) {
             case SCREEN_LOGGING:
                 screenLoggingSubscribers.add(eventSubscriber);
@@ -22,7 +22,7 @@ public class EventBus {
         }
     }
 
-    public void unsubscribe(ETopic topic, IEventSubscriber eventSubscriber){
+    public void unsubscribe(ETopic topic, IEventSubscriber eventSubscriber) {
         switch (topic) {
             case SCREEN_LOGGING:
                 screenLoggingSubscribers.remove(eventSubscriber);
@@ -30,10 +30,10 @@ public class EventBus {
         }
     }
 
-    public void publish(ETopic topic, String text){
+    public void publish(ETopic topic, String text) {
         switch (topic) {
             case SCREEN_LOGGING:
-                for(IEventSubscriber subscriber: screenLoggingSubscribers){
+                for (IEventSubscriber subscriber : screenLoggingSubscribers) {
                     subscriber.invoice(text);
                 }
                 break;

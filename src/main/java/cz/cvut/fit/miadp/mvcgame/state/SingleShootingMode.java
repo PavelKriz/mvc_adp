@@ -11,7 +11,7 @@ public class SingleShootingMode implements IShootingMode {
 
     @Override
     public void shoot(AbsCannon cannon) {
-        cannon.primitiveShoot( );        
+        cannon.primitiveShoot();
     }
-    
+
 }

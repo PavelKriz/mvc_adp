@@ -9,10 +9,11 @@ import cz.cvut.fit.miadp.mvcgame.visitor.IVisitor;
 public class EnemyA extends AbsEnemy {
 
     //deciding which image is going to use for d
-    public enum EnemyType{
+    public enum EnemyType {
         ENEMY_1,
         ENEMY_2
     }
+
     EnemyType enemyType;
 
     @Override

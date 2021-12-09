@@ -7,17 +7,16 @@ public abstract class AbstractGameCommand {
     IGameModel subject;
     Object memento;
 
-    protected abstract void execute( );
+    protected abstract void execute();
 
-    public void doExecute( ){
-        this.memento = this.subject.createMemento( );
-        this.execute( );
+    public void doExecute() {
+        this.memento = this.subject.createMemento();
+        this.execute();
     }
 
-    public void unExecute( ) {
-        this.subject.setMemento( this.memento );
+    public void unExecute() {
+        this.subject.setMemento(this.memento);
     }
 
-    
-    
+
 }
