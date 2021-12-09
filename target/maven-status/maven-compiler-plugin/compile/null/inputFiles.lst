@@ -23,6 +23,7 @@
 /home/pavel/code/cvut/adp/Pavel_Kriz-mvcgame-ni-adp-2021-master/src/main/java/cz/cvut/fit/miadp/mvcgame/state/SingleShootingMode.java
 /home/pavel/code/cvut/adp/Pavel_Kriz-mvcgame-ni-adp-2021-master/src/main/java/cz/cvut/fit/miadp/mvcgame/strategy/IEnemyMovingStrategy.java
 /home/pavel/code/cvut/adp/Pavel_Kriz-mvcgame-ni-adp-2021-master/src/main/java/cz/cvut/fit/miadp/mvcgame/publisher_subscriber/IEventSubscriber.java
+/home/pavel/code/cvut/adp/Pavel_Kriz-mvcgame-ni-adp-2021-master/src/main/java/cz/cvut/fit/miadp/mvcgame/model/gameObjects/IHittable.java
 /home/pavel/code/cvut/adp/Pavel_Kriz-mvcgame-ni-adp-2021-master/src/main/java/cz/cvut/fit/miadp/mvcgame/model/gameObjects/AbsMissile.java
 /home/pavel/code/cvut/adp/Pavel_Kriz-mvcgame-ni-adp-2021-master/src/main/java/cz/cvut/fit/miadp/mvcgame/command/ToggleMovingStrategyCmd.java
 /home/pavel/code/cvut/adp/Pavel_Kriz-mvcgame-ni-adp-2021-master/src/main/java/cz/cvut/fit/miadp/mvcgame/abstractFactory/IGameObjectsFactory.java
@@ -46,7 +47,6 @@
 /home/pavel/code/cvut/adp/Pavel_Kriz-mvcgame-ni-adp-2021-master/src/main/java/cz/cvut/fit/miadp/mvcgame/strategy/IMovingStrategy.java
 /home/pavel/code/cvut/adp/Pavel_Kriz-mvcgame-ni-adp-2021-master/src/main/java/cz/cvut/fit/miadp/mvcgame/abstractFactory/GameObjectsFactoryA.java
 /home/pavel/code/cvut/adp/Pavel_Kriz-mvcgame-ni-adp-2021-master/src/main/java/cz/cvut/fit/miadp/mvcgame/model/gameObjects/familyA/CannonA.java
-/home/pavel/code/cvut/adp/Pavel_Kriz-mvcgame-ni-adp-2021-master/src/main/java/cz/cvut/fit/miadp/mvcgame/model/gameObjects/IHitable.java
 /home/pavel/code/cvut/adp/Pavel_Kriz-mvcgame-ni-adp-2021-master/src/main/java/cz/cvut/fit/miadp/mvcgame/config/MvcGameConfig.java
 /home/pavel/code/cvut/adp/Pavel_Kriz-mvcgame-ni-adp-2021-master/src/main/java/cz/cvut/fit/miadp/mvcgame/model/gameObjects/familyA/CollisionA.java
 /home/pavel/code/cvut/adp/Pavel_Kriz-mvcgame-ni-adp-2021-master/src/main/java/cz/cvut/fit/miadp/mvcgame/interpreter/LoadExpression.java

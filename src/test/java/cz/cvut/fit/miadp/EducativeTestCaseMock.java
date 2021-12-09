@@ -14,6 +14,7 @@ import cz.cvut.fit.miadp.mvcgame.model.gameObjects.AbsMissile;
 import cz.cvut.fit.miadp.mvcgame.strategy.SimpleMovingStrategy;
 import junit.framework.Assert;
 
+// add this as a parameter of the jdk: --add-opens java.base/java.lang=ALL-UNNAMED
 public class EducativeTestCaseMock {
 
     @Test

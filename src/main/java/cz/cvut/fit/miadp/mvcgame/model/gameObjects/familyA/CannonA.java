@@ -2,6 +2,7 @@ package cz.cvut.fit.miadp.mvcgame.model.gameObjects.familyA;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import cz.cvut.fit.miadp.mvcgame.abstractFactory.IGameObjectsFactory;
 import cz.cvut.fit.miadp.mvcgame.config.MvcGameConfig;
@@ -27,7 +28,7 @@ public class CannonA extends AbsCannon {
         this.power = MvcGameConfig.INIT_POWER;
         this.angle = MvcGameConfig.INIT_ANGLE;
 
-        this.shootingBatch = new ArrayList<AbsMissile>( );
+        this.shootingBatch = new ArrayList<>();
         this.shootingMode = AbsCannon.SINGLE_SHOOTING_MODE;
     }
 
@@ -84,12 +85,24 @@ public class CannonA extends AbsCannon {
         }  
     }
 
-    private class ExternalCannonAState {
+    static private class ExternalCannonAState {
         private int cannonX;
         private int cannonY;
         private int power;
         private double angle;
         private IShootingMode shootingMode;
+
+        @Override
+        public boolean equals(Object obj) {
+            if(! (obj instanceof ExternalCannonAState) ) return false;
+            ExternalCannonAState ecs = (ExternalCannonAState) obj;
+            if(this.cannonX != ecs.cannonX) return false;
+            if(this.cannonY != ecs.cannonY) return false;
+            if(this.power != ecs.power) return false;
+            if(this.angle != ecs.angle) return false;
+            if(! this.shootingMode.getClass().equals(ecs.shootingMode.getClass())) return false;
+            return true;
+        }
     }
 
     @Override
